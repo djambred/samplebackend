@@ -122,7 +122,8 @@ class CostumerController extends Controller
         $table = implode('', $request->all());
         //dd($table);
         Schema::connection('dbtransaction')->dropIfExists($table);
-        $test = Schema::connection('dbtransaction')->create($table, function (Blueprint $table) {
+        $test = Schema::connection('dbtransaction')->create($table, function (Blueprint $table)
+        {
             $table->id();
             $table->integer('costumer_id');
             $table->integer('costumer_to');
