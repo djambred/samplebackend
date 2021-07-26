@@ -23,6 +23,7 @@ $router->group(['prefix' => 'api/v1/trans', 'middleware' => 'auth'], function() 
     $router->put('/{id}', ['uses' => 'TransactionController@update']);
     $router->get('/{id}', ['uses' => 'TransactionController@show']);
     $router->delete('/{id}', ['uses' => 'TransactionController@destroy']);
+    $router->get('/detail', ['uses' => 'TransactionController@detail']);
 });
 
 $router->group(['prefix' => 'api/v1/cost', 'middleware' => 'auth'], function() use ($router){
@@ -31,7 +32,6 @@ $router->group(['prefix' => 'api/v1/cost', 'middleware' => 'auth'], function() u
     $router->put('/{id}', ['uses' => 'CostumerController@update']);
     $router->get('/{id}', ['uses' => 'CostumerController@show']);
     $router->delete('/{id}', ['uses' => 'CostumerController@destroy']);
-    $router->get('/detail', ['uses' => 'CostumerController@detail']);
 });
 
 $router->group(['prefix' => 'api/v1/hist', 'middleware' => 'auth'], function() use ($router){
