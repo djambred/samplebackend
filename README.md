@@ -27,3 +27,12 @@ dengan type API Key
 isi key dengan password
 isi value dengan password yang ada di dbcore table user
 pilih Add to header
+
+#URL FOR COSTUMER
+URL http://localhost:8000/api/v1/cost
+
+#URL FOR HISTORY
+URL http://localhost:8000/api/v1/hist
+
+#URL FOR TRANSACTION
+URL http://localhost:8000/api/v1/trans
