@@ -31,6 +31,7 @@ $router->group(['prefix' => 'api/v1/cost', 'middleware' => 'auth'], function() u
     $router->put('/{id}', ['uses' => 'CostumerController@update']);
     $router->get('/{id}', ['uses' => 'CostumerController@show']);
     $router->delete('/{id}', ['uses' => 'CostumerController@destroy']);
+    $router->get('/detail', ['uses' => 'CostumerController@detail']);
 });
 
 $router->group(['prefix' => 'api/v1/hist', 'middleware' => 'auth'], function() use ($router){

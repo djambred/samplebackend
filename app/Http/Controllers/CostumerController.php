@@ -106,4 +106,9 @@ class CostumerController extends Controller
         $cost = DB::connection('dbcore')->table('costumers')->where('id', $id)->delete();
         return response()->json("Berhasil Hapus");
     }
+
+    public function detail(){
+        $data= DB::select('SELECT * FROM dbtransaction.transactions as C1 JOIN dbcore.costumers AS C2 JOIN dbhistory.histories AS c3 WHERE c1.costumer_id = c2.id = c3.costumer_id');
+        return response()->json($data);
+    }
 }

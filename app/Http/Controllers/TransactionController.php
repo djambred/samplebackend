@@ -32,8 +32,10 @@ class TransactionController extends Controller
         $this->validate($request, [
             'costumer_id' => 'required',
             'costumer_to' => 'required',
+            'nominal_transaksi' => 'required',
             'saldo_awal' => 'required',
             'saldo_akhir' => 'required'
+
         ]);
 
         $request['created_at'] = $timestamp;
