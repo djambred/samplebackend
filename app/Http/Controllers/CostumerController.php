@@ -108,7 +108,16 @@ class CostumerController extends Controller
     }
 
     public function detail(){
-        $data= DB::select('SELECT * FROM dbtransaction.transactions as C1 JOIN dbcore.costumers AS C2 JOIN dbhistory.histories AS c3 WHERE c1.costumer_id = c2.id = c3.costumer_id');
+        //tradisional
+        //$data= DB::select('SELECT * FROM dbtransaction.transactions as C1 JOIN dbcore.costumers AS C2 JOIN dbhistory.histories AS c3 WHERE c1.costumer_id = c2.id = c3.costumer_id');
+        //new era
+        $data=DB::table(DB::raw('dbcore.costumers AS db1_tb1'))
+            ->join(DB::raw('dbhistory.histories AS db2_tb2'),'db1_tb1.id','=','db2_tb2.costumer_id')
+            ->join(DB::raw('dbtransaction.transactions AS db3_tb3'),'db1_tb1.id','=','db3_tb3.costumer_id')
+            ->select('db1_tb1.id as id_pelanggan', 'db1_tb1.name as nama_pelanggan', 'db3_tb3.id as id_transaksi', 'db3_tb3.nominal_transaksi as nominal_transaksi', 'db3_tb3.keterangan as keterangan_transaksi', 'db2_tb2.status as status_transaksi', 'db2_tb2.updated_at as waktu_transaksi')
+            ->get();
+
         return response()->json($data);
     }
+
 }
