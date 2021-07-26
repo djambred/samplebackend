@@ -36,3 +36,6 @@ URL http://localhost:8000/api/v1/hist
 
 #URL FOR TRANSACTION
 URL http://localhost:8000/api/v1/trans
+
+#URL FOR SAMPLE JOINDBTB
+URL http://localhost:8000/api/v1/trans/detail

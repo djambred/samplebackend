@@ -18,15 +18,17 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'api/v1/trans', 'middleware' => 'auth'], function() use ($router){
+    $router->get('/detail', ['uses' => 'TransactionController@detail']);
     $router->get('/', ['uses' => 'TransactionController@index']);
     $router->post('/', ['uses' => 'TransactionController@create']);
     $router->put('/{id}', ['uses' => 'TransactionController@update']);
     $router->get('/{id}', ['uses' => 'TransactionController@show']);
     $router->delete('/{id}', ['uses' => 'TransactionController@destroy']);
-    $router->get('/detail', ['uses' => 'TransactionController@detail']);
+
 });
 
 $router->group(['prefix' => 'api/v1/cost', 'middleware' => 'auth'], function() use ($router){
+    $router->post('/test', ['uses' => 'CostumerController@test']);
     $router->get('/', ['uses' => 'CostumerController@index']);
     $router->post('/', ['uses' => 'CostumerController@create']);
     $router->put('/{id}', ['uses' => 'CostumerController@update']);

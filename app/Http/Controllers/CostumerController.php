@@ -6,6 +6,8 @@ use App\Models\Costumer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 
 class CostumerController extends Controller
 {
@@ -38,6 +40,9 @@ class CostumerController extends Controller
         $request['updated_at'] = $timestamp;
 
         $cost = DB::connection('dbcore')->table('costumers')->insert($request->all());
+
+
+
         return response()->json(response("Berhasil ditambahkan"));
     }
 
@@ -105,6 +110,50 @@ class CostumerController extends Controller
         //
         $cost = DB::connection('dbcore')->table('costumers')->where('id', $id)->delete();
         return response()->json("Berhasil Hapus");
+    }
+
+    public function test(Request $request){
+        $timestamp = \Carbon\Carbon::now()->toDateTimeString();
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        //$request['tabel'] = date('YmdHis');
+        $request['tabel']= '_transaksi';
+        $table = implode('', $request->all());
+        //dd($table);
+        Schema::connection('dbtransaction')->dropIfExists($table);
+        $test = Schema::connection('dbtransaction')->create($table, function (Blueprint $table) {
+            $table->id();
+            $table->integer('costumer_id');
+            $table->integer('costumer_to');
+            $table->string('nominal_transaksi');
+            $table->string('saldo_awal');
+            $table->string('saldo_akhir');
+            $table->text('keterangan')->nullable;
+            $table->timestamps();
+        });
+        //$select = DB::connection('dbcore')->table('costumers')->where('name', $table)->get();
+        // $result=json_decode($select,true);
+        // // dd($result);
+        // foreach ($result as $value) {
+        //         //$obj = ($value['id']);
+
+
+        // }
+        DB::connection('dbtransaction')->table($table)->insert([
+            'costumer_id'  => '5',
+            'costumer_to'  => '1',
+            'nominal_transaksi' => '3',
+            'saldo_awal'  => '10',
+            'saldo_akhir'  => '7',
+            'keterangan' => 'transfer',
+            'created_at' => $timestamp,
+            'updated_at' => $timestamp
+        ]);
+
+        $select = DB::connection('dbtransaction')->table($table)->get();
+        //dd($select);
+       return response()->json($select);
     }
 
 }
