@@ -29,5 +29,15 @@ class TransactionSeeder extends Seeder
             'created_at' => $timestamp,
             'updated_at' => $timestamp
         ]);
+        DB::connection('dbtransaction')->table('transactions')->insert([
+            'costumer_id'  => '2',
+            'costumer_to'  => '1',
+            'nominal_transaksi' => '3',
+            'saldo_awal'  => '10',
+            'saldo_akhir'  => '7',
+            'keterangan' => 'transfer',
+            'created_at' => $timestamp,
+            'updated_at' => $timestamp
+        ]);
     }
 }

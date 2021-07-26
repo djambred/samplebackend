@@ -25,5 +25,11 @@ class HistorySeeder extends Seeder
             'created_at' => $timestamp,
             'updated_at' => $timestamp
         ]);
+        DB::connection('dbhistory')->table('histories')->insert([
+            'costumer_id'  => '2',
+            'status' => 'sukses',
+            'created_at' => $timestamp,
+            'updated_at' => $timestamp
+        ]);
     }
 }
